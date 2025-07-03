@@ -1,6 +1,6 @@
 // Data
-let numOfSquaresPerSide = 16;
-let heightWidth = "60px";
+let numOfSquaresPerSide = 32;
+let heightWidth = 960/numOfSquaresPerSide;
 const container = document.querySelector(".sketch-container");
 
 // Non-function logic
@@ -9,16 +9,15 @@ for (let i = 0; i < numOfSquaresPerSide; i++) {
     const flexRow = document.createElement("div");
     flexRow.classList.toggle("flexRow");
     flexRow.style.display = "flex";
-    flexRow.style.gap = "10px";
+    flexRow.style.flex = "1";
     flexRow.style.justifyContent = "space-evenly";
     flexRow.style.alignItems = "center";
-    flexRow.style.marginBottom = "10px";
 
     // Create squares in each row
     for (let j = 0; j < numOfSquaresPerSide; j++) {
         const sketchBox = document.createElement("div");
-        sketchBox.style.height = heightWidth;
-        sketchBox.style.width = heightWidth;
+        sketchBox.style.height = `${heightWidth}px`;
+        sketchBox.style.width = `${heightWidth}px`;
         sketchBox.classList.toggle("sketch-box");
         flexRow.appendChild(sketchBox);
     }
