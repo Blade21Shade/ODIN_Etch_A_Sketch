@@ -1,0 +1,11 @@
+.sketch-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sketch-box {
+    height: 60px;
+    width: 60px;
+}
