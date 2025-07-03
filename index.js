@@ -3,16 +3,21 @@ let numOfSquaresPerSide = 16;
 let heightWidth = 960/numOfSquaresPerSide;
 const container = document.querySelector(".sketch-container");
 
-// Create rows
-for (let i = 0; i < numOfSquaresPerSide; i++) {
-    const flexRow = document.createElement("div");
-    flexRow.classList.toggle("flexRow");
-    flexRow.style.display = "flex";
-    flexRow.style.flex = "1";
-    flexRow.style.justifyContent = "space-evenly";
-    flexRow.style.alignItems = "center";
+// Functions for filling the grid
+function createRows() {
+    for (let i = 0; i < numOfSquaresPerSide; i++) {
+        const flexRow = document.createElement("div");
+        flexRow.classList.toggle("flexRow");
+        flexRow.style.display = "flex";
+        flexRow.style.flex = "1";
+        flexRow.style.justifyContent = "space-evenly";
+        flexRow.style.alignItems = "center";
+        createBoxesForRow(flexRow);
+        container.appendChild(flexRow);   
+    }
+}
 
-    // Create squares in each row
+function createBoxesForRow(flexRow) {
     for (let j = 0; j < numOfSquaresPerSide; j++) {
         const sketchBox = document.createElement("div");
         sketchBox.style.height = `${heightWidth}px`;
@@ -20,8 +25,6 @@ for (let i = 0; i < numOfSquaresPerSide; i++) {
         sketchBox.classList.toggle("sketch-box");
         flexRow.appendChild(sketchBox);
     }
-    
-    container.appendChild(flexRow);
 }
 
 // This event listener will cause each box to "draw"
@@ -35,3 +38,7 @@ container.addEventListener("mouseover", e => {
 // Button logic
 const clearGridButton = document.querySelector(".clear-grid-button");
 const newGridButton = document.querySelector(".new-grid-button");
+
+// Start the page
+container.replaceChildren();
+createRows();
