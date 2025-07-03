@@ -20,11 +20,16 @@ for (let i = 0; i < numOfSquaresPerSide; i++) {
         sketchBox.style.height = heightWidth;
         sketchBox.style.width = heightWidth;
         sketchBox.classList.toggle("sketch-box");
-        sketchBox.addEventListener("mouseenter", e => {
-            e.target.classList.toggle("activated-box");
-        });
-
         flexRow.appendChild(sketchBox);
     }
+    
     container.appendChild(flexRow);
 }
+
+// This event listener will cause each box to "draw"
+// The event listener is added to the container so only one listener is needed for the whole page, instead of one per row or even worse one per box
+container.addEventListener("mouseover", e => {
+    if (e.target.classList.contains("sketch-box")) {
+        e.target.classList.toggle("activated-box");
+    }
+});
