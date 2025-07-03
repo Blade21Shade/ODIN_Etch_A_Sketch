@@ -14,17 +14,22 @@ for (let i = 0; i < numOfSquaresPerSide; i++) {
     flexRow.style.alignItems = "center";
     flexRow.style.marginBottom = "10px";
 
+    // Each row will have an event listener to check when a box in the row is moused over
+    // This means there are numOfSquaresPerSide event listeners as there is one per row, instead of one for each box which would be numOf...^2 listeners
+    flexRow.addEventListener("mouseover", e => {
+        if (e.target.classList.contains("sketch-box")) {
+            e.target.classList.toggle("activated-box");
+        }
+    });
+
     // Create squares in each row
     for (let j = 0; j < numOfSquaresPerSide; j++) {
         const sketchBox = document.createElement("div");
         sketchBox.style.height = heightWidth;
         sketchBox.style.width = heightWidth;
         sketchBox.classList.toggle("sketch-box");
-        sketchBox.addEventListener("mouseenter", e => {
-            e.target.classList.toggle("activated-box");
-        });
-
         flexRow.appendChild(sketchBox);
     }
+    
     container.appendChild(flexRow);
 }
