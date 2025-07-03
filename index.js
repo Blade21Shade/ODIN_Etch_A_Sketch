@@ -1,9 +1,8 @@
 // Data
-let numOfSquaresPerSide = 32;
+let numOfSquaresPerSide = 16;
 let heightWidth = 960/numOfSquaresPerSide;
 const container = document.querySelector(".sketch-container");
 
-// Non-function logic
 // Create rows
 for (let i = 0; i < numOfSquaresPerSide; i++) {
     const flexRow = document.createElement("div");
@@ -32,3 +31,7 @@ container.addEventListener("mouseover", e => {
         e.target.classList.toggle("activated-box");
     }
 });
+
+// Button logic
+const clearGridButton = document.querySelector(".clear-grid-button");
+const newGridButton = document.querySelector(".new-grid-button");
