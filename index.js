@@ -37,6 +37,15 @@ container.addEventListener("mouseover", e => {
 
 // Button logic
 const clearGridButton = document.querySelector(".clear-grid-button");
+clearGridButton.addEventListener("click", () => {
+    const boxes = document.querySelectorAll(".sketch-box");
+    boxes.forEach(box => {
+        if (box.classList.contains("activated-box")) {
+            box.classList.toggle("activated-box");
+        }
+    })
+})
+
 const newGridButton = document.querySelector(".new-grid-button");
 
 // Start the page
