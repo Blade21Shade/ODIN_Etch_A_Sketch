@@ -43,10 +43,22 @@ clearGridButton.addEventListener("click", () => {
         if (box.classList.contains("activated-box")) {
             box.classList.toggle("activated-box");
         }
-    })
-})
+    });
+});
 
 const newGridButton = document.querySelector(".new-grid-button");
+newGridButton.addEventListener("click", () => {
+    let userNum = prompt(`Enter number of boxes you want for width and height\nCurrent number: ${numOfSquaresPerSide} (Max 100)`);
+    if (userNum < 1) {
+        userNum = 1;
+    } else if (userNum > 100) {
+        userNum = 100;
+    }
+    numOfSquaresPerSide = userNum;
+    heightWidth = 960/numOfSquaresPerSide;
+    container.replaceChildren();
+    createRows();
+});
 
 // Start the page
 container.replaceChildren();
