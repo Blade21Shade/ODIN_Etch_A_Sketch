@@ -8,3 +8,7 @@
 .sketch-box {
     border: 2px black solid;
 }
+
+.activated-box {
+    background-color: black;
+}

@@ -1,7 +1,9 @@
+// Data
 let numOfSquaresPerSide = 16;
 let heightWidth = "60px";
-
 const container = document.querySelector(".sketch-container");
+
+// Non-function logic
 // Create rows
 for (let i = 0; i < numOfSquaresPerSide; i++) {
     const flexRow = document.createElement("div");
@@ -18,6 +20,10 @@ for (let i = 0; i < numOfSquaresPerSide; i++) {
         sketchBox.style.height = heightWidth;
         sketchBox.style.width = heightWidth;
         sketchBox.classList.toggle("sketch-box");
+        sketchBox.addEventListener("mouseenter", e => {
+            e.target.classList.toggle("activated-box");
+        });
+
         flexRow.appendChild(sketchBox);
     }
     container.appendChild(flexRow);
