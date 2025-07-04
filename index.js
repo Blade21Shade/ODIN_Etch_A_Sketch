@@ -1,6 +1,14 @@
 // Data
-let numOfSquaresPerSide = 16;
-let numOfPixelsPerSide = 960;
+const defaultNumOfSquares = 16;
+const minimumNumOfSquares = 1;
+const maximumNumOfSquares = 100;
+
+const defaultNumOfPixels = 960;
+const minimumNumOfPixels = 200;
+const maximumNumOfPixels = 1200;
+
+let numOfSquaresPerSide = defaultNumOfSquares;
+let numOfPixelsPerSide = defaultNumOfPixels;
 let heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
 const container = document.querySelector(".sketch-container");
 
@@ -54,17 +62,8 @@ changeBoxesPerSideButton.addEventListener("click", () => {
 (This is a square, so each side will have the same number)
 
 Current number: ${numOfSquaresPerSide} (Max 100)`));
-    
-    if (Number.isNaN(userNum)) {
-        userNum = 1;
-    }
-    
-    if (userNum < 1) {
-        userNum = 1;
-    } else if (userNum > 100) {
-        userNum = 100;
-    }
-    numOfSquaresPerSide = userNum;
+
+    updateGridVariable(minimumNumOfSquares, maximumNumOfSquares, defaultNumOfSquares, userNum, "box");
     heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
     container.replaceChildren();
     createRows();
@@ -79,22 +78,34 @@ changeGridSizeButton.addEventListener("click", () => {
 
 Current number: ${numOfPixelsPerSide} (Min: 200 Max: 1200)`));
 
-    if (Number.isNaN(userNum)) {
-        userNum = 960;
-    }
-    
-    if (userNum < 200) {
-        userNum = 200;
-    } else if (userNum > 1200) {
-        userNum = 1200;
-    }
-    numOfPixelsPerSide = userNum;
-    heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
+    updateGridVariable(minimumNumOfPixels, maximumNumOfPixels, defaultNumOfPixels, userNum, "pixel");
     container.style.width = `${numOfPixelsPerSide}px`;
     container.style.height = `${numOfPixelsPerSide}px`;
     container.replaceChildren();
     createRows(); 
 });
+
+function updateGridVariable(min, max, defaultVal, input, variable) {
+    if (Number.isNaN(input)) {
+        input = defaultVal;
+    }
+    
+    if (input < min) {
+        input = min;
+    } else if (input > max) {
+        input = max;
+    }
+
+    switch(variable) {
+        case "pixel":
+            numOfPixelsPerSide = input;
+            break;
+        case "box":
+            numOfSquaresPerSide = input;
+            break;
+    }
+    heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
+}
 
 // Start the page
 container.style.width = `${numOfPixelsPerSide}px`;
