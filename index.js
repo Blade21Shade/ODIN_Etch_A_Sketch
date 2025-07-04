@@ -1,6 +1,7 @@
 // Data
 let numOfSquaresPerSide = 16;
-let heightWidth = 960/numOfSquaresPerSide;
+let numOfPixelsPerSide = 960;
+let heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
 const container = document.querySelector(".sketch-container");
 
 // Functions for filling the grid
@@ -46,10 +47,10 @@ clearGridButton.addEventListener("click", () => {
     });
 });
 
-const newGridButton = document.querySelector(".new-grid-button");
-newGridButton.addEventListener("click", () => {
+const changeBoxesPerSideButton = document.querySelector(".change-boxes-per-side-button");
+changeBoxesPerSideButton.addEventListener("click", () => {
     let userNum = parseInt(prompt(
-`Enter the number of boxes you want per side
+`Enter the number of boxes you want per side of the grid
 (This is a square, so each side will have the same number)
 
 Current number: ${numOfSquaresPerSide} (Max 100)`));
@@ -64,11 +65,39 @@ Current number: ${numOfSquaresPerSide} (Max 100)`));
         userNum = 100;
     }
     numOfSquaresPerSide = userNum;
-    heightWidth = 960/numOfSquaresPerSide;
+    heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
     container.replaceChildren();
     createRows();
 });
 
+const changeGridSizeButton = document.querySelector(".change-grid-size-button");
+changeGridSizeButton.addEventListener("click", () => {
+    let userNum = parseInt(prompt(
+`Enter the number of pixels you want per side of the grid
+(This is a square, so each side will have the same number)
+
+
+Current number: ${numOfPixelsPerSide} (Min: 200 Max: 1200)`));
+
+    if (Number.isNaN(userNum)) {
+        userNum = 960;
+    }
+    
+    if (userNum < 200) {
+        userNum = 200;
+    } else if (userNum > 1200) {
+        userNum = 1200;
+    }
+    numOfPixelsPerSide = userNum;
+    heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
+    container.style.width = `${numOfPixelsPerSide}px`;
+    container.style.height = `${numOfPixelsPerSide}px`;
+    container.replaceChildren();
+    createRows(); 
+});
+
 // Start the page
+container.style.width = `${numOfPixelsPerSide}px`;
+container.style.height = `${numOfPixelsPerSide}px`;
 container.replaceChildren();
 createRows();
