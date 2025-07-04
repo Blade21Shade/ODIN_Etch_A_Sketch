@@ -21,49 +21,49 @@ function createRows() {
         flexRow.style.flex = "1";
         flexRow.style.justifyContent = "space-evenly";
         flexRow.style.alignItems = "center";
-        createBoxesForRow(flexRow);
+        createSquaresForRow(flexRow);
         container.appendChild(flexRow);   
     }
 }
 
-function createBoxesForRow(flexRow) {
+function createSquaresForRow(flexRow) {
     for (let j = 0; j < numOfSquaresPerSide; j++) {
-        const sketchBox = document.createElement("div");
-        sketchBox.style.height = `${heightWidth}px`;
-        sketchBox.style.width = `${heightWidth}px`;
-        sketchBox.classList.toggle("sketch-box");
-        flexRow.appendChild(sketchBox);
+        const sketchSquare = document.createElement("div");
+        sketchSquare.style.height = `${heightWidth}px`;
+        sketchSquare.style.width = `${heightWidth}px`;
+        sketchSquare.classList.toggle("sketch-square");
+        flexRow.appendChild(sketchSquare);
     }
 }
 
-// This event listener will cause each box to "draw"
-// The event listener is added to the container so only one listener is needed for the whole page, instead of one per row or even worse one per box
+// This event listener will cause each square to "draw"
+// The event listener is added to the container so only one listener is needed for the whole page, instead of one per row or even worse one per square
 container.addEventListener("mouseover", e => {
-    if (e.target.classList.contains("sketch-box")) {
-        e.target.classList.toggle("activated-box");
+    if (e.target.classList.contains("sketch-square")) {
+        e.target.classList.toggle("activated-square");
     }
 });
 
 // Button logic
 const clearGridButton = document.querySelector(".clear-grid-button");
 clearGridButton.addEventListener("click", () => {
-    const boxes = document.querySelectorAll(".sketch-box");
-    boxes.forEach(box => {
-        if (box.classList.contains("activated-box")) {
-            box.classList.toggle("activated-box");
+    const squares = document.querySelectorAll(".sketch-square");
+    squares.forEach(square => {
+        if (square.classList.contains("activated-square")) {
+            square.classList.toggle("activated-square");
         }
     });
 });
 
-const changeBoxesPerSideButton = document.querySelector(".change-boxes-per-side-button");
-changeBoxesPerSideButton.addEventListener("click", () => {
+const changeSquaresPerSideButton = document.querySelector(".change-squares-per-side-button");
+changeSquaresPerSideButton.addEventListener("click", () => {
     let userNum = parseInt(prompt(
-`Enter the number of boxes you want per side of the grid
+`Enter the number of squares you want per side of the grid
 (This is a square, so each side will have the same number)
 
 Current number: ${numOfSquaresPerSide} (Max 100)`));
 
-    updateGridVariable(minimumNumOfSquares, maximumNumOfSquares, defaultNumOfSquares, userNum, "box");
+    updateGridVariable(minimumNumOfSquares, maximumNumOfSquares, defaultNumOfSquares, userNum, "square");
     heightWidth = numOfPixelsPerSide/numOfSquaresPerSide;
     container.replaceChildren();
     createRows();
@@ -100,7 +100,7 @@ function updateGridVariable(min, max, defaultVal, input, variable) {
         case "pixel":
             numOfPixelsPerSide = input;
             break;
-        case "box":
+        case "square":
             numOfSquaresPerSide = input;
             break;
     }
